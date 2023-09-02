@@ -25,6 +25,13 @@ namespace Airport
         public static void DisplayMessageNoFlight(string destination)
         {
             Console.WriteLine($"There is no flight to the city: {destination}");
+            Console.WriteLine("Our company has connection only between:");
+            for (int i = 1; i < 10; i++)
+            {
+                Console.WriteLine((Cities)i);
+
+            }
+
         }
 
         public static void DisplayRegistrationMessage()
