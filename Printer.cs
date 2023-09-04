@@ -28,7 +28,7 @@ namespace Airport
             Console.WriteLine("Our company has connection only between:");
             for (int i = 1; i < 10; i++)
             {
-                Console.WriteLine((Cities)i);
+                Console.WriteLine((CityName)i);
 
             }
 

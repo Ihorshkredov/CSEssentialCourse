@@ -6,43 +6,16 @@ using System.Threading.Tasks;
 
 namespace Airport
 {
-    public enum Cities
-    { 
-        Berlin = 1,
-        Kiev,
-        Paris,
-        London,
-        Helsinki,
-        Budapest,
-        Istambul,
-        Riga,
-        Vien,
-        Lissabon
-
-    }
-
-    public enum FlightCode
-    {
-        AY,
-        BU,
-        HA,
-        KO,
-        WS,
-        RP,
-        OV,
-        MN,
-        QA,
-        IL
-    }
+   
 
     internal class Airport
     {
-        Random random = new Random();
+        
         List<Flight> airportDB = null;
 
         public Airport()
-        {
-           airportDB = GetFlightDB();
+        {  
+            airportDB = GetFlightDB();
             Console.ForegroundColor= ConsoleColor.Yellow;
             Console.WriteLine("Connecting to AIRport Data Base . . .");
             Console.ResetColor();
@@ -53,17 +26,19 @@ namespace Airport
         //Method for randomly generate Flight Data Base
         public List<Flight> GetFlightDB()
         {
+            Random random = new Random();
+
             var airportDB = new List<Flight>();
             for (int i = 0; i < 50; i++)
             {
-                var departure = (Cities)random.Next(1,10);
-                var destination = (Cities)random.Next(1, 10);
-                string flightnumber = ((FlightCode)random.Next(1, 10)).ToString()+(random.Next(1000,3000)).ToString();
+                var departure = (CityName)random.Next(1,10);
+                var destination = (CityName)random.Next(1, 10);
+                string flightnumber = ((FlightCode)random.Next(1, 10)).ToString() + (random.Next(1000,3000)).ToString();
                 DateTime dateTime = DateTime.Now.AddDays(random.Next(1,30));
 
                 airportDB.Add(new Flight(destination, departure, flightnumber, dateTime));
             }
-            return airportDB;   
+              return airportDB;   
         }
 
         //Method for find flight information from Airport
@@ -71,10 +46,9 @@ namespace Airport
         {
             var result = new List<Flight>();
 
-            if (Enum.TryParse<Cities>(city,true,out Cities destination))
+            if (Enum.TryParse<CityName>(city,true,out CityName destination))
             {
-                
-                
+ 
                 foreach (var item in airportDB)
                 {
                     if (item.Destination == destination)

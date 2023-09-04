@@ -25,12 +25,7 @@ namespace Airport
             {
                 Printer.DisplayMessageNoFlight(destination);
             }
-
-
-            
-
-            
-            
+         
         }
     }
 }
