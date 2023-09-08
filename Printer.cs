@@ -12,17 +12,25 @@ namespace Airport
         {
             
             Console.ForegroundColor= ConsoleColor.DarkYellow;
-            Console.WriteLine("Thanks for your choise. Our company can propose to you next flights:");
+            Console.WriteLine("Thanks for your choise. Our company can propose to you next flights:\n");
             Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine(new string('-',100));
+            Console.WriteLine("Flight Number |  Departure Date    |  Departure Time     |    From          |      Destination      |");
+            Console.WriteLine(new string('-', 100));
 
             foreach (Flight flight in data) 
             {
-                Console.WriteLine(new string('-',50));
-                Console.WriteLine($"Flight Number: {flight.Number} , from:\'{flight.Start}\', to:\'{flight.Destination}\'. Departure date - \'{flight.FlightDate}\'");
-                Console.WriteLine(new string('-',50));
+                PrintFlightData(flight);      
             }
             Console.ResetColor();
             
+        }
+
+        public static void PrintFlightData(Flight flight)
+        {
+            Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine(flight);
+            Console.WriteLine(new string('-', 100));
         }
 
         public static void DisplayMessageNoFlight(string destination)
@@ -42,27 +50,39 @@ namespace Airport
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Please enter the Number of the Flight which you want to go: ");
             string flightNumber = Console.ReadLine();
-            foreach (var item in flightList)
+
+            var matchedFlights = from flight in flightList
+                                 where flight.Number == flightNumber
+                                 select flight;
+
+            if (matchedFlights.Count() != 0)
             {
-                if (item.Number == flightNumber)
+
+                foreach (var item in flightList)
                 {
-                    Console.WriteLine(new string('-',50));
-                    Console.WriteLine($"You have been registered to the flight number {flightNumber}");
-                    Console.WriteLine($"Your flight from {item.Start} to {item.Destination}" +
-                        $" has departure date on: {item.FlightDate}" );
-                    Console.WriteLine("Thank you for chosing our company");
-                    Console.WriteLine("Good bye...");
+                    if (item.Number == flightNumber)
+                    {
+                        Console.WriteLine(new string('-',100));
+                        Console.WriteLine($"You have been registered to the flight number {flightNumber}");
+                        Console.WriteLine($"Your flight from {item.Start} to {item.Destination}" +
+                            $" has departure date on: {item.FlightDate}" );
+                        Console.WriteLine("Thank you for chosing our company");
+                        Console.WriteLine("Good bye...");
 
+                    }
                 }
-
+            }
+            else
+            {
+                Console.WriteLine("Incorrect flight number. Try again");
             }
         }
 
         public static void DisplayIntro(string clientName)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(new string('-', 50));
-            Console.WriteLine("Airport service...");
+            Console.WriteLine(new string('-', 100));
+            Console.WriteLine("Welcome to Flight Menu.");
             Console.Write($"Dear {clientName}, please enter city of your destination ->");
             Console.ResetColor();
         }
@@ -70,11 +90,11 @@ namespace Airport
         public static string GetClientInfo()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(new string('-',50));
+            Console.WriteLine(new string('-',100));
             Console.Write("Hello. Please enter your full name:");
             string clientName = Console.ReadLine();
             Console.WriteLine($"Hello {clientName}. We glad that you want to use our company service to take a fligt ");
-            Console.WriteLine(new string('-', 50));
+            Console.WriteLine(new string('-', 100));
             Console.ResetColor();
             return clientName;
         }
@@ -82,7 +102,7 @@ namespace Airport
         public static bool ProposeRegistration(string clientName)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(new string('-', 50));
+            Console.WriteLine(new string('-', 100));
             Console.Write($"Dear {clientName}, would you like to register for some flight? Y / N :");
             string choise = Console.ReadLine();
             return (choise == "Y") ? true : false ;

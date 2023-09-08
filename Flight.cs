@@ -22,5 +22,12 @@ namespace Airport
             Number = number;
             FlightDate = flightDate;
         }
+
+        public override string ToString()
+        {
+            
+            return $"{Number}        | {FlightDate.Date} | {FlightDate.TimeOfDay}    |   {Start}           |     {Destination} ";
+            
+        }
     }
 }
