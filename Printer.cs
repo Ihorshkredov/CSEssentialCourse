@@ -51,25 +51,19 @@ namespace Airport
             Console.WriteLine("Please enter the Number of the Flight which you want to go: ");
             string flightNumber = Console.ReadLine();
 
-            var matchedFlights = from flight in flightList
-                                 where flight.Number == flightNumber
-                                 select flight;
+            var mathedFlights = flightList.Where(flight => flight.Number == flightNumber);
 
-            if (matchedFlights.Count() != 0)
+            if (mathedFlights.Any())
             {
-
-                foreach (var item in flightList)
+                foreach (var item in mathedFlights)
                 {
-                    if (item.Number == flightNumber)
-                    {
-                        Console.WriteLine(new string('-',100));
-                        Console.WriteLine($"You have been registered to the flight number {flightNumber}");
-                        Console.WriteLine($"Your flight from {item.Start} to {item.Destination}" +
-                            $" has departure date on: {item.FlightDate}" );
-                        Console.WriteLine("Thank you for chosing our company");
-                        Console.WriteLine("Good bye...");
+                    Console.WriteLine(new string('-', 100));
+                    Console.WriteLine($"You have been registered to the flight number {flightNumber}");
+                    Console.WriteLine($"Your flight from {item.Start} to {item.Destination}" +
+                        $" has departure date on: {item.FlightDate}");
+                    Console.WriteLine("Thank you for chosing our company");
+                    Console.WriteLine("Good bye...");
 
-                    }
                 }
             }
             else

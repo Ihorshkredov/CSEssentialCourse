@@ -8,7 +8,7 @@ namespace Airport
 {
     public enum CityName
     {
-        Berlin = 1,
+        Berlin,
         Kyiv,
         Paris,
         London,
