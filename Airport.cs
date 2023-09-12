@@ -11,32 +11,14 @@ namespace Airport
 
     internal class Airport
     {
-        
-        List<Flight> flightList = null;
+        private readonly List<Flight> flightList;
 
         public Airport()
         {  
             flightList = GetListOfFlights();
         }
 
-        public List<Flight> GetListOfFlights()
-        {
-            Random random = new Random();
-
-            var flightList = new List<Flight>();
-            for (int i = 0; i < 50; i++)
-            {
-                var departure = (CityName)random.Next(0,9);
-                var destination = (CityName)random.Next(0, 9);
-                string flightnumber = ((FlightCode)random.Next(0, 9)).ToString() + (random.Next(1000,3000)).ToString();
-                DateTime dateTime = DateTime.Now.AddDays(random.Next(1,30));
-
-                flightList.Add(new Flight(destination, departure, flightnumber, dateTime));
-            }
-            return flightList;   
-        }
-
-        public List<Flight> GetFlightInfo( string city )
+        public List<Flight> GetFlightInfo(string city)
         {
             List<Flight> result = new List<Flight>();
 
@@ -47,12 +29,29 @@ namespace Airport
                             orderby flight.FlightDate
                             select flight;
 
-               foreach (var item in query)
-                {
-                    result.Add(item);   
-                }
+               result.AddRange(query);
             }
+
             return result;        
+        }
+
+        private List<Flight> GetListOfFlights()
+        {
+            Random random = new Random();
+
+            var flightList = new List<Flight>();
+            for (int i = 0; i < 50; i++)
+            {
+                var departure = (CityName)random.Next(0, 9);
+                var destination = (CityName)random.Next(0, 9);
+                string flightnumber = ((FlightCode)random.Next(0, 9)).ToString()
+                                                + (random.Next(1000, 3000)).ToString();
+                DateTime dateTime = DateTime.Now.AddDays(random.Next(1, 30));
+
+                flightList.Add(new Flight(destination, departure, flightnumber, dateTime));
+            }
+
+            return flightList;
         }
     }
 }

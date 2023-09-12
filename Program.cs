@@ -3,25 +3,21 @@ namespace Airport
 {
     internal class Program
     {
-        
-
         static void Main(string[] args)
         {
             while (true)
             {
                 string clientName = Printer.GetClientInfo();
             
-            
-                Airport myAirport= new Airport();
-
-        
+                Airport myAirport = new Airport();
+      
                 Printer.DisplayIntro(clientName);
                 string destination = Console.ReadLine();
 
            
                 var searchResult = myAirport.GetFlightInfo(destination);
 
-                if (searchResult.Count>0)
+                if (searchResult.Any())
                 {
                     Printer.DiasplayData(searchResult);
                     bool registrationChoise = Printer.ProposeRegistration(clientName);
@@ -36,13 +32,12 @@ namespace Airport
                 }
                 else
                 {
-                Printer.DisplayMessageNoFlight(destination);
+                    Printer.DisplayMessageNoFlight(destination);
                 } 
 
                 Console.ReadLine();
                 Console.Clear();
-            }
-            
+            }           
         }
     }
 }

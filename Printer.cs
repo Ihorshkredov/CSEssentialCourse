@@ -86,10 +86,13 @@ namespace Airport
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(new string('-',100));
             Console.Write("Hello. Please enter your full name:");
+
             string clientName = Console.ReadLine();
+
             Console.WriteLine($"Hello {clientName}. We glad that you want to use our company service to take a fligt ");
             Console.WriteLine(new string('-', 100));
             Console.ResetColor();
+            
             return clientName;
         }
 
@@ -99,7 +102,8 @@ namespace Airport
             Console.WriteLine(new string('-', 100));
             Console.Write($"Dear {clientName}, would you like to register for some flight? Y / N :");
             string choise = Console.ReadLine();
-            return (choise == "Y") ? true : false ;
+            
+            return (choise == "Y");
     
         }
 
